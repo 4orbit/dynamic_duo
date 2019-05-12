@@ -1,0 +1,23 @@
+[hosts]
+backupsrv srv_ip=10.40.8.174
+db01 	  srv_ip=10.40.8.92 		#pg-11-study
+db02 	  srv_ip=10.40.8.254
+
+[dbserver]
+db01
+db02
+
+[bckserver]
+backupsrv
+
+
+
+[apt:children]
+hosts
+
+[ssh:children]
+hosts
+
+[pgsql:children]
+dbserver
+bckserver
