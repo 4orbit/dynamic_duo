@@ -1,11 +1,11 @@
 ---
-pg_home_dir: "/home/postgres"
+pg_home_dir: "/var/lib/pgsql"
 pg_shell: "/bin/bash"
 pg_osuser: "postgres"
 pg_osgroup: "postgres"
-pg_additional_groups:
-  - "ssl-cert"
-postgresql_common_include: "/etc/postgresql-common/createcluster.d"
+#pg_additional_groups:
+#  - "ssl-cert"
+#postgresql_common_include: "/etc/postgresql-common/createcluster.d"
 
 pg_super_user: "postgres"
 # The pg_super_password is "flynn_lives". The vault password is "postgres".
@@ -20,15 +20,15 @@ pg_super_password: !vault |
           3639
 
 logrotate_file: "/etc/logrotate.d/pgsql_custom"
-default_locale: "en_GB.UTF-8"
-data_area: "/var/lib/postgresql"
+default_locale: "ru_RU.UTF-8"
+data_area: "/var/lib/pgsql/11/data"
 log_directory: "/var/log/postgresql"
-wal_area: "/var/lib/postgresql/pg_wal"
+wal_area: "/var/lib/pgsql/11/data/pg_wal"
 
 pg_dirs:
-  data_area: "/var/lib/postgresql"
+  data_area: "/var/lib/pgsql/11/data"
   log_directory: "/var/log/postgresql"
-  wal_area: "/var/lib/postgresql/pg_wal"
+  wal_area: "/var/lib/pgsql/11/data/pg_wal"
 
 log_rotate:
   mode: "weekly"

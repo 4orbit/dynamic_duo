@@ -1,0 +1,40 @@
+---
+- name: Ensure group {{ pg_osgroup }} exists
+  group:
+    name: "{{ pg_osgroup }}"
+    state: present
+
+- name: create the {{ pg_osuser }} user and the home directory
+  user:
+    name: "{{ pg_osuser }}"
+    group: "{{ pg_osgroup }}"
+    #groups: "{{ pg_additional_groups }}"
+    create_home: yes
+    move_home: yes
+    home: "{{ pg_home_dir }}"
+    shell: "{{ pg_shell }}"
+    system: yes
+    state: present
+
+- name: install repo for PostgreSQL11
+  yum:
+    name: https://download.postgresql.org/pub/repos/yum/11/redhat/rhel-7-x86_64/pgdg-centos11-11-2.noarch.rpm
+    state: present
+
+- name: install common packages
+  yum:
+    name: "{{ common_packages }}"
+    state: latest
+
+- name: install postgresql versioned packages
+  yum:
+    name: "{{ pgsql_packages }}"
+    state: latest
+
+- name: create data cluster
+  command: "/usr/pgsql-{{pg_major_ver}}/bin/postgresql-{{pg_major_ver}}-setup initdb"
+  environment:
+    PGSETUP_INITDB_OPTIONS: "--locale=ru_RU.UTF-8"
+  args:
+    creates: /var/lib/pgsql/{{pg_major_ver}}/data/postgresql.conf
+

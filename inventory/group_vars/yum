@@ -1,0 +1,22 @@
+---
+pgdg_codename:
+  ascii: stretch
+
+pg_major_ver: 11
+
+pgsql_versions:
+  - 9.6
+  - 10
+  - 11
+
+
+pgsql_packages:
+  - postgresql11
+  - postgresql11-server
+  - postgresql11-contrib
+
+
+common_packages:
+  - postgresql11
+  - pgbackrest
+  - python-psycopg2

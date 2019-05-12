@@ -1,19 +1,19 @@
 ---
-- hosts: apt
+- hosts: yum
   roles:
     - hosts
-    - apt
-  remote_user: ansible
+    - yum
+  remote_user: root
   become: yes
 
-- hosts: ssh
-  roles:
-    - ssh
-  remote_user: ansible
-  become: yes
+#- hosts: ssh
+#  roles:
+#    - ssh
+#  remote_user: root
+#  become: yes
 
 - hosts: dbserver
   roles:
     - pgsql
-  remote_user: ansible
+  remote_user: root
   become: yes
